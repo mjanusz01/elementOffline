@@ -1,6 +1,11 @@
 package com.example.parmegianocounter
 
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.IBinder
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -18,26 +23,6 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : ComponentActivity() {
 
-    /*private lateinit var mService: WordListenerService
-    private var mBound: Boolean = false
-    var onParmegianoMentioned = {}
-
-    private val connection = object : ServiceConnection {
-
-        override fun onServiceConnected(className: ComponentName, service: IBinder) {
-            val binder = service as WordListenerService.LocalBinder
-            mService = binder.getService()
-            mBound = true
-            mService.onParmegianoDetected = onParmegianoMentioned
-        }
-
-        override fun onServiceDisconnected(arg0: ComponentName) {
-            mBound = false
-        }
-    }*/
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,17 +30,6 @@ class MainActivity : ComponentActivity() {
 
             val viewModel = getViewModel<DishViewModel>()
             val uiState by viewModel.uiState.collectAsState()
-
-            //onParmegianoMentioned = { //viewModel.onParmegianoMentioned() }
-
-            /*SignalReceiver(
-                onMentioned = { //viewModel.onParmegianoMentioned() }
-            }
-            )
-
-            Intent(applicationContext, WordListenerService::class.java).also {
-                startService(it)
-            }*/
 
             val k = uiState.dishes.collectAsState(emptyList()).value
 
@@ -75,18 +49,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-    /*override fun onStart() {
-        super.onStart()
-        // Bind to LocalService.
-        Intent(this, WordListenerService::class.java).also { intent ->
-            bindService(intent, connection, Context.BIND_AUTO_CREATE)
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        unbindService(connection)
-        mBound = false
-    }*/
 }

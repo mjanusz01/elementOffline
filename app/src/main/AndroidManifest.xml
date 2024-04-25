@@ -15,8 +15,6 @@
         </intent>
     </queries>
 
-
-
     <application
         android:name=".DishApplication"
         android:allowBackup="true"
@@ -42,7 +40,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.ParmegianoCounter">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,12 +47,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".services.SignalReceiver" android:exported="false">
-            <intent-filter>
-                <action android:name="APP_SPECIFIC_BROADCAST" />
-            </intent-filter>
-        </receiver>
-        <service android:name=".services.WordListenerService" />
     </application>
 
 </manifest>

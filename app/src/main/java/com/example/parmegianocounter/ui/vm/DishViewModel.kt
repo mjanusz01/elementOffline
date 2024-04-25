@@ -12,6 +12,7 @@ import com.example.parmegianocounter.data.model.DishEntity
 import com.example.parmegianocounter.data.model.asEntity
 import com.example.parmegianocounter.data.repository.DishRepository
 import com.example.parmegianocounter.data.repository.NetworkResult
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +20,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.internal.toImmutableList
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -34,12 +36,14 @@ class DishViewModel(
         service.scheduleWithFixedDelay({
             handler.run {
                 viewModelScope.launch {
-                    when(val result = dishRepository.downloadDishes()){
-                        is NetworkResult.Success -> {
-                            dishRepository.upsertDishes(result.data.dishes.map{it.asEntity()})
-                        }
-                        else -> {
+                    withContext(Dispatchers.IO){
+                        when(val result = dishRepository.downloadDishes()){
+                            is NetworkResult.Success -> {
+                                dishRepository.upsertDishes(result.data.dishes.map{it.asEntity()})
+                            }
+                            else -> {
 
+                            }
                         }
                     }
                 }
