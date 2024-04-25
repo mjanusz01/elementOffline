@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -34,7 +35,8 @@ class MainActivity : ComponentActivity() {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LazyColumn(Modifier.fillMaxSize()) {
+                    Text(modifier = Modifier.weight(0.2F), text = uiState.connectionState.toString())
+                    LazyColumn(Modifier.weight(0.8F).fillMaxSize()) {
 
                         items(k.size) {
                             DishCard(k[it].name, k[it].additional, k[it].price.toString())
