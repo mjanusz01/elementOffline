@@ -1,4 +1,4 @@
-package com.example.parmegianocounter.ui
+package com.example.parmegianocounter.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,25 +24,25 @@ fun DishCard(
     name: String,
     additional: String,
     price: String,
-    isIconShown: Boolean = false
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(if (isIconShown) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.background)
+            .padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 5.dp)
+            .clip(RoundedCornerShape(20.dp))
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .padding(10.dp),
     ) {
         Column {
             Text(
                 text = name,
                 fontSize = 20.sp,
-                color = if (isIconShown) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onPrimaryContainer,
-                fontWeight = if (isIconShown) FontWeight.W700 else FontWeight.Normal
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
             Text(
                 text = additional,
                 fontSize = 14.sp,
-                color = if (isIconShown) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onPrimaryContainer
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
 
@@ -48,7 +50,7 @@ fun DishCard(
         Text(
             text = "$price zł",
             fontSize = 25.sp,
-            color = if (isIconShown) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onPrimaryContainer
+            color = MaterialTheme.colorScheme.onPrimaryContainer
         )
     }
 }
@@ -79,7 +81,6 @@ fun DishCardPreviewOpen() {
                     name = "Filet z kurczaka parmegiano",
                     additional = "Gnocchi, sos pomidorowy, mix sałat",
                     "29",
-                    true
                 )
             }
         }

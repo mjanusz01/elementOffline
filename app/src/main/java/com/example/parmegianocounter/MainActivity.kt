@@ -12,7 +12,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.parmegianocounter.ui.DishCard
+import com.example.parmegianocounter.ui.components.ConnectionCard
+import com.example.parmegianocounter.ui.components.DishCard
 import com.example.parmegianocounter.ui.theme.ParmegianoCounterTheme
 import com.example.parmegianocounter.ui.vm.DishViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -26,8 +27,7 @@ class MainActivity : ComponentActivity() {
 
             val viewModel = getViewModel<DishViewModel>()
             val uiState by viewModel.uiState.collectAsState()
-
-            val k = uiState.dishes.collectAsState(emptyList()).value
+            val dishes = uiState.dishes.collectAsState(emptyList()).value
 
             ParmegianoCounterTheme {
                 Column(
@@ -35,11 +35,12 @@ class MainActivity : ComponentActivity() {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(modifier = Modifier.weight(0.2F), text = uiState.connectionState.toString())
-                    LazyColumn(Modifier.weight(0.8F).fillMaxSize()) {
-
-                        items(k.size) {
-                            DishCard(k[it].name, k[it].additional, k[it].price.toString())
+                    ConnectionCard(connectionState = uiState.connectionState, modifier = Modifier.weight(0.2F))
+                    LazyColumn(
+                        Modifier
+                            .fillMaxSize().weight(0.8F)) {
+                        items(dishes.size) {
+                            DishCard(dishes[it].name, dishes[it].additional, dishes[it].price.toString())
                         }
                     }
                 }

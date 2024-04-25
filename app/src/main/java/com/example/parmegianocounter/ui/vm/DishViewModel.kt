@@ -38,9 +38,7 @@ class DishViewModel(
                                 dishRepository.deleteDishes()
                                 dishRepository.upsertDishes(result.data.dishes.map { it.asEntity() })
                             }
-                            else -> {
-
-                            }
+                            else -> Unit
                         }
                     }
                 }
