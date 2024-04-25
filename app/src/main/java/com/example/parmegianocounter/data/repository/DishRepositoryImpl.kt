@@ -15,18 +15,22 @@ data class DishRepositoryImpl(
     private val dishDataSource: DishDataSource,
     private val ioDispatcher: CoroutineDispatcher,
     private val dishDao: DishDao
-) : DishRepository{
-    override suspend fun downloadDishes(): NetworkResult<DishData> = withContext(ioDispatcher){
+) : DishRepository {
+    override suspend fun downloadDishes(): NetworkResult<DishData> = withContext(ioDispatcher) {
         handleNetworkResult {
             dishDataSource.getJokes()
         }
     }
 
-    override fun getDishes(): Flow<List<Dish>> = dishDao.getDishEntities().map{
+    override fun getDishes(): Flow<List<Dish>> = dishDao.getDishEntities().map {
         it.map(DishEntity::asExternalModel)
     }
 
-    override suspend fun upsertDishes(dishes: List<DishEntity>) = withContext(ioDispatcher){
+    override suspend fun deleteDishes() {
+        dishDao.deleteDishes()
+    }
+
+    override suspend fun upsertDishes(dishes: List<DishEntity>) = withContext(ioDispatcher) {
         dishDao.upsertDishes(dishes)
     }
 }

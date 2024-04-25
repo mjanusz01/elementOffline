@@ -5,11 +5,13 @@ import com.example.parmegianocounter.data.model.DishData
 import com.example.parmegianocounter.data.model.DishEntity
 import kotlinx.coroutines.flow.Flow
 
-interface DishRepository{
+interface DishRepository {
 
-    suspend fun downloadDishes() : NetworkResult<DishData>
+    suspend fun downloadDishes(): NetworkResult<DishData>
 
     fun getDishes(): Flow<List<Dish>>
+
+    suspend fun deleteDishes()
 
     suspend fun upsertDishes(dishes: List<DishEntity>)
 

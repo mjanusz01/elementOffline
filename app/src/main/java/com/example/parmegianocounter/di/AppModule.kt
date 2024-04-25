@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit
 
 val appModule = module {
     single(named("BASE_URL")) {
-        "http://192.168.0.59:3000"
+        "http://10.10.42.131:3000"
     }
     single {
         Dispatchers.IO

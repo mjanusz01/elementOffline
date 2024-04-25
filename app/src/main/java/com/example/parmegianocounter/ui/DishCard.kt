@@ -30,17 +30,17 @@ fun DishCard(
             .background(if (isIconShown) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.background)
             .padding(10.dp),
     ) {
-        Column{
+        Column {
             Text(
                 text = name,
                 fontSize = 20.sp,
-                color = if(isIconShown) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onPrimaryContainer,
-                fontWeight = if(isIconShown) FontWeight.W700 else FontWeight.Normal
+                color = if (isIconShown) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onPrimaryContainer,
+                fontWeight = if (isIconShown) FontWeight.W700 else FontWeight.Normal
             )
             Text(
                 text = additional,
                 fontSize = 14.sp,
-                color = if(isIconShown) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onPrimaryContainer
+                color = if (isIconShown) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
 
@@ -48,7 +48,7 @@ fun DishCard(
         Text(
             text = "$price zł",
             fontSize = 25.sp,
-            color = if(isIconShown) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onPrimaryContainer
+            color = if (isIconShown) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onPrimaryContainer
         )
     }
 }
@@ -58,8 +58,12 @@ fun DishCard(
 fun DishCardPreview() {
     ParmegianoCounterTheme {
         Surface {
-            Column{
-                DishCard(name = "Filet z kurczaka parmegiano", additional = "Gnocchi, sos pomidorowy, mix sałat","29")
+            Column {
+                DishCard(
+                    name = "Filet z kurczaka parmegiano",
+                    additional = "Gnocchi, sos pomidorowy, mix sałat",
+                    "29"
+                )
             }
         }
     }
@@ -70,8 +74,13 @@ fun DishCardPreview() {
 fun DishCardPreviewOpen() {
     ParmegianoCounterTheme {
         Surface {
-            Column{
-                DishCard(name = "Filet z kurczaka parmegiano", additional = "Gnocchi, sos pomidorowy, mix sałat","29", true)
+            Column {
+                DishCard(
+                    name = "Filet z kurczaka parmegiano",
+                    additional = "Gnocchi, sos pomidorowy, mix sałat",
+                    "29",
+                    true
+                )
             }
         }
     }
